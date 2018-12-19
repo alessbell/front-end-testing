@@ -1,18 +1,15 @@
-import { Head } from 'mdx-deck'
+import { Head } from 'mdx-deck';
+import { CodeSurfer } from 'mdx-deck-code-surfer';
 
-export { default as theme } from './theme'
+export { default as theme } from './theme';
 
 <Head>
-  <title>Presentation Title</title>
+  <title>Front-end testing</title>
 </Head>
 
-# Hello
+## Front-End Testing
 
----
-
-## Edit this file
-
-To create your presentation
+### By Alessia Bellisario
 
 ```notes
 - Create speaker notes in fenced code blocks
@@ -20,4 +17,61 @@ To create your presentation
 
 ---
 
-<https://github.com/jxnblk/mdx-deck>
+# <🔺>
+
+#### ^ proverbial triangle
+
+---
+
+<CodeSurfer
+  title="Lines"
+  code={require('!raw-loader!./snippets/1.mdx')}
+  steps={[
+    { notes: 'Use ⬆️ and ⬇️ keys' },
+    { lines: [6], notes: 'Highlight a single line ⬇️' },
+    { lines: [5, 7, 8], notes: '... or multiple lines ➡️' },
+  ]}
+/>
+
+---
+
+<CodeSurfer
+  title="Scale and Scroll"
+  code={require('!raw-loader!./snippets/5.jsx')}
+  steps={[
+    { notes: 'Long snippets are scaled ⬇️' },
+    { range: [1, 3], notes: '⬇️' },
+    { range: [5, 13], notes: '⬇️' },
+    { range: [15, 32], notes: '⬇️' },
+    { lines: [30, 35], notes: '⬇️' },
+    { range: [15, 32], lines: [40], notes: '➡️' },
+  ]}
+/>
+
+---
+
+Talk outline:
+
+- testing pyramid
+- integration tests
+- goal of testing?
+- react-testing-library
+  - benefits?
+    - https://twitter.com/housecor/status/1047150875502960641
+    - comparison blog post https://medium.com/homeaway-tech-blog/integration-testing-in-react-21f92a55a894
+  - contrast with enzyme
+    - show examples of enzyme tests
+  - .instance() tests = brittle, hooks are coming...
+  - events: https://github.com/kentcdodds/dom-testing-library/blob/master/src/events.js
+  - snapshot testing?
+- social proof (Guillermo Rauch, Kent C. Dodds, Jamie Builds)
+  - https://twitter.com/jamiebuilds/status/1070062304518004736
+  - https://twitter.com/housecor/status/1074319158362415106
+  - Gatsby: https://www.gatsbyjs.org/docs/testing-react-components/
+  - react-redux uses RTL: https://github.com/reduxjs/react-redux/blob/v6.0.0/test/components/connect.spec.js
+  - testing a component that uses Context https://egghead.io/lessons/react-test-a-component-that-uses-a-react-context-consumer
+- JSDOM? E2E tests?
+- EXAMPLES:
+  - Kent C Dodds react-redux example from RTL repo https://github.com/kentcdodds/react-testing-library/blob/master/examples/__tests__/react-redux.js
+  - Kent C Dodds react-router example https://github.com/kentcdodds/react-testing-library/blob/master/examples/__tests__/react-router.js
+  - react-testing-examples https://react-testing-examples.com/jest-enzyme/
