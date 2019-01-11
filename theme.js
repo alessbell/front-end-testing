@@ -1,4 +1,4 @@
-import { future as theme } from 'mdx-deck/themes';
+import { dark as theme } from 'mdx-deck/themes';
 import nightOwl from 'prism-react-renderer/themes/nightOwl';
 
 export default {
@@ -6,6 +6,9 @@ export default {
   codeSurfer: {
     ...nightOwl,
     showNumbers: false,
+  },
+  li: {
+    margin: '2rem',
   },
 };
 
