@@ -3,10 +3,10 @@ import { CodeSurfer } from 'mdx-deck-code-surfer';
 export { default as theme } from './theme';
 
 <Head>
-  <title>🏄🏻‍♀️ front-end testing🏄🏻‍♀️ by Alessia Bellisario</title>
+  <title>🧩 front-end testing 🧩 by Alessia Bellisario</title>
 </Head>
 
-# 🏄🏻‍♀️ front-end testing🏄🏻‍♀️
+# 🧩 front-end testing 🧩
 
 ### by Alessia Bellisario
 
@@ -153,25 +153,15 @@ see: setProps utility fn provided by Enzyme
 
 ---
 
-| ENZYME                                                 | RTL                                  |
-| ------------------------------------------------------ | ------------------------------------ |
-| ✅ querying elements by class name                     | ❌                                   |
-| ✅ shallow rendering                                   | ❌ implementation details            |
-| ✅ getting a component `instance`                      | ❌ implementation details            |
-| ✅ getting and setting a component's props (`props()`) | ❌ implementation details            |
-| ✅ getting and setting a component's state (`state()`) | ❌ implementation details            |
-| ❌                                                     | ✅ testing real DOM elements         |
-| ❌                                                     | ✅ utils for async DOM manipulations |
-
----
-
-things react testing library cannot do
-
-- shallow rendering
-- querying elements by class name
-- getting a component instance
-- ~~getting and setting a component's props (`props()`)~~
-- getting and setting a component's state (`state()`)
+| Enzyme                                         | React Testing Library                |
+| ---------------------------------------------- | ------------------------------------ |
+| ✅ querying elements by class name             | ❌                                   |
+| ✅ shallow rendering                           | ❌                                   |
+| ✅ getting a component `instance`              | ❌                                   |
+| ✅ getting and setting a component's `props()` | ❌                                   |
+| ✅ getting and setting a component's `state()` | ❌                                   |
+| ❌                                             | ✅ testing real DOM elements         |
+| ❌                                             | ✅ utils for async DOM manipulations |
 
 ---
 
