@@ -3,10 +3,10 @@ import { CodeSurfer } from 'mdx-deck-code-surfer';
 export { default as theme } from './theme';
 
 <Head>
-  <title>🧩 front-end testing 🧩 by Alessia Bellisario</title>
+  <title>🧩 Front-end Testing 🧩 by Alessia Bellisario</title>
 </Head>
 
-# 🧩 front-end testing 🧩
+# 🧩 Front-end Testing 🧩
 
 ### by Alessia Bellisario
 
@@ -14,11 +14,11 @@ export { default as theme } from './theme';
 
 # 🔺
 
-#### ^ proverbial pyramid
+#### ^ Proverbial pyramid
 
 ---
 
-## testing pyramid
+## Testing pyramid
 
 <img
   width="500"
@@ -33,7 +33,7 @@ Why the pyramid metaphor?
 
 ---
 
-## testing trophy
+## Testing trophy
 
 <img
   width="500"
@@ -47,27 +47,29 @@ see: https://twitter.com/kentcdodds/status/960723172591992832?lang=en
 
 ---
 
-# overview
+# Overview
 
-1.  review testing terms
-2.  front-end testing at Breather
-3.  React Testing Library vs. Enzyme
-4.  patterns
-
----
-
-## terminology
-
-- **test runner**: runs tests, e.g. Wallaby, Karma, Jest in jest-runner
-- **testing framework**: organizes tests (in Jest, think: `describe` = suite, `it` = spec), e.g. Jest, AVA, Jasmine, Mocha, etc.
-- **mocking framework**: Jest, Sinon.js
-- **assertion library**: verify code's behaviour, e.g. Jest, AVA, Chai, ShouldJS
+1.  Review testing terms
+2.  What is Enzyme?
+3.  Testing implementation details
+4.  React Testing Library vs. Enzyme
 
 ---
 
-...what about enzyme?
+## 1. Testing terminology
+
+- **Test runner**: runs tests, e.g. Wallaby, Karma, Jest in jest-runner
+- **Testing framework**: organizes tests (in Jest, think: `describe` = suite, `it` = spec), e.g. Jest, AVA, Jasmine, Mocha, etc.
+- **Mocking framework**: Jest, Sinon.js
+- **Assertion library**: verify code's behaviour, e.g. Jest, AVA, Chai, ShouldJS
 
 ---
+
+...what about Enzyme?
+
+---
+
+## 2. What's Enzyme?
 
 > "Enzyme is a JavaScript _Testing utility_ for React that makes it easier to assert, manipulate, and traverse your React Components' output."
 >
@@ -75,14 +77,14 @@ see: https://twitter.com/kentcdodds/status/960723172591992832?lang=en
 
 ---
 
-enzyme
+### Enzyme
 
-the API revolves around manipulating ReactComponents via the ReactWrapper returned from find() or the React component itself using instance() rather than DOM nodes (what the end user would be interacting with)
+The API revolves around manipulating ReactComponents via the ReactWrapper returned from find() or the React component itself using instance() rather than DOM nodes (what the end user would be interacting with)
 
 ---
 
 <CodeSurfer
-  title="enzyme"
+  title="Enzyme"
   code={require('!raw-loader!./snippets/enzyme.jsx')}
   steps={[
     { notes: 'use ⬆️ and ⬇️ keys' },
@@ -99,18 +101,18 @@ see: setProps utility fn provided by Enzyme
 
 ---
 
-"testing implementation details"
+## 3. "Testing implementation details"
 
 ---
 
 <CodeSurfer
-  title="enzyme: calling react component methods"
+  title="Enzyme: calling react component methods"
   code={require('!raw-loader!./snippets/implementationDetails.jsx')}
 />
 
 ---
 
-## testing implementation details
+## Testing implementation details
 
 1.  will this test break when there’s a mistake that would break the component in production?
 2.  will this test continue to work when there’s a fully backward compatible refactor of the component?
@@ -118,7 +120,7 @@ see: setProps utility fn provided by Enzyme
 ---
 
 <CodeSurfer
-  title="enzyme: calling react component methods"
+  title="Enzyme: calling react component methods"
   code={require('!raw-loader!./snippets/implementationDetailsWComments.jsx')}
   steps={[
     { notes: 'use ⬆️ and ⬇️ keys' },
@@ -129,17 +131,20 @@ see: setProps utility fn provided by Enzyme
 
 ---
 
-| Enzyme                                 | React Testing Library                                        |
-| -------------------------------------- | ------------------------------------------------------------ |
-| ✅ query elements by class name        | ❌                                                           |
-| ✅ shallow rendering                   | ❌                                                           |
-| ✅ get a component `instance`          | ❌                                                           |
-| ✅ get and set a component's `props()` | ❌                                                           |
-| ✅ get and set a component's `state()` | ❌                                                           |
-| ❌                                     | ✅ test real DOM elements                                    |
-| ❌                                     | ✅ utils for async DOM manipulations                         |
-| ❌                                     | ✅ interact with DOM nodes produced by functional components |
-| ❌                                     | ✅ encourages accessibility                                  |
+## 4. Enzyme vs. RTL
+
+---
+
+| Enzyme                                           | React Testing Library                                        |
+| ------------------------------------------------ | ------------------------------------------------------------ |
+| ✅ query elements by class name                  | ❌                                                           |
+| ✅ shallow rendering                             | ❌                                                           |
+| ✅ get a component `instance`                    | ❌                                                           |
+| ✅ get and set a component's `props()`/`state()` | ❌                                                           |
+| ❌                                               | ✅ test real DOM elements                                    |
+| ❌                                               | ✅ utils for async DOM manipulations                         |
+| ❌                                               | ✅ interact with DOM nodes produced by functional components |
+| ❌                                               | ✅ encourages accessibility                                  |
 
 ---
 
@@ -168,11 +173,11 @@ const wrapper = mount(<MyComponent />);
 expect(wrapper.getDOMNode()).to.have.property('className');
 ```
 
-Soure: [enzyme docs](https://github.com/airbnb/enzyme/blob/master/docs/api/ReactWrapper/getDOMNode.md)
+Soure: [Enzyme docs](https://github.com/airbnb/enzyme/blob/master/docs/api/ReactWrapper/getDOMNode.md)
 
 ---
 
-# Encourages accessibility
+# Final thought: RTL encourages accessibility
 
 - Tests will fail if e.g. form not wired up to input correctly
 - RTL provides documentation: ["Which query should I use?"](https://testing-library.com/docs/guide-which-query)
@@ -192,7 +197,7 @@ Soure: [enzyme docs](https://github.com/airbnb/enzyme/blob/master/docs/api/React
 
 - Better developer experience: handling async behaviour is easier and debugging is a breeze compared to Enzyme
 - Hooks: Enzyme doesn't play nicely with functional components, so RTL is more future-proof
-- Styled Components v4: we're currently prevented from upgrading because of a compatibility issue with enzyme
+- Styled Components v4: we're currently prevented from upgrading because of a compatibility issue with Enzyme
 
 ---
 
