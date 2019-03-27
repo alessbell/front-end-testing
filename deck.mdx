@@ -75,10 +75,6 @@ see: https://twitter.com/kentcdodds/status/960723172591992832?lang=en
 
 ---
 
-## 🎉 testing utilities 🎉
-
----
-
 enzyme
 
 the API revolves around manipulating ReactComponents via the ReactWrapper returned from find() or the React component itself using instance() rather than DOM nodes (what the end user would be interacting with)
@@ -133,81 +129,71 @@ see: setProps utility fn provided by Enzyme
 
 ---
 
-<CodeSurfer
-  title="rtl prototype"
-  code={require('!raw-loader!./snippets/gist.jsx')}
-  steps={[
-    { notes: 'use ⬆️ and ⬇️ keys' },
-    {
-      range: [1, 37],
-      notes:
-        'https://gist.github.com/kentcdodds/7a9bed9639cb8900d0bce9f0c513c8c9',
-    },
-    {
-      range: [38, 62],
-      notes:
-        'https://gist.github.com/kentcdodds/7a9bed9639cb8900d0bce9f0c513c8c9',
-    },
-  ]}
-/>
+| Enzyme                                 | React Testing Library                                        |
+| -------------------------------------- | ------------------------------------------------------------ |
+| ✅ query elements by class name        | ❌                                                           |
+| ✅ shallow rendering                   | ❌                                                           |
+| ✅ get a component `instance`          | ❌                                                           |
+| ✅ get and set a component's `props()` | ❌                                                           |
+| ✅ get and set a component's `state()` | ❌                                                           |
+| ❌                                     | ✅ test real DOM elements                                    |
+| ❌                                     | ✅ utils for async DOM manipulations                         |
+| ❌                                     | ✅ interact with DOM nodes produced by functional components |
+| ❌                                     | ✅ encourages accessibility                                  |
 
 ---
 
-| Enzyme                                         | React Testing Library                |
-| ---------------------------------------------- | ------------------------------------ |
-| ✅ querying elements by class name             | ❌                                   |
-| ✅ shallow rendering                           | ❌                                   |
-| ✅ getting a component `instance`              | ❌                                   |
-| ✅ getting and setting a component's `props()` | ❌                                   |
-| ✅ getting and setting a component's `state()` | ❌                                   |
-| ❌                                             | ✅ testing real DOM elements         |
-| ❌                                             | ✅ utils for async DOM manipulations |
+Even with `mount` in Enzyme, the API revolves around manipulating ReactComponents via the ReactWrapper returned from find() or the React component itself using instance() rather than DOM nodes (what the end user would be interacting with).
+souce: https://medium.com/homeaway-tech-blog/integration-testing-in-react-21f92a55a894
 
 ---
 
-- Even with `mount` in Enzyme, the API revolves around manipulating ReactComponents via the ReactWrapper returned from find() or the React component itself using instance() rather than DOM nodes (what the end user would be interacting with).
-  souce: https://medium.com/homeaway-tech-blog/integration-testing-in-react-21f92a55a894
-- paired down example of RTL in Kent C. Dodds' gist https://gist.github.com/kentcdodds/7a9bed9639cb8900d0bce9f0c513c8c9
+What about accessing DOM nodes via Enzyme?
 
-Talk outline:
+---
 
-- unit testing args passed to API calls
+## `.getDOMNode() => DOMComponent`
 
-Can you get DOM nodes in Enzyme? Kinda, but not really > https://github.com/airbnb/enzyme/blob/master/docs/api/ReactWrapper/getDOMNode.md
+Returns the outer most DOMComponent of the current wrapper.
 
 - can only be called on a wrapper of a single node.
 - will raise if called on a wrapper of a stateless functional component.
 
-- goal of testing?
-  - example of web-utils code formatting fn: write tests for legacy code, refactor the internals but don't change the fn signature
-    <!-- - state of code coverage -->
-- react-testing-library
+#### Returns
 
-  - benefits?
-    - https://twitter.com/housecor/status/1047150875502960641
-    - comparison blog post https://medium.com/homeaway-tech-blog/integration-testing-in-react-21f92a55a894
-  - contrast with enzyme
-    - show examples of enzyme tests
-  - .instance() tests = brittle, hooks are coming... https://blog.kentcdodds.com/react-hooks-whats-going-to-happen-to-my-tests-df4c2b4d67b7
-  - events: https://github.com/kentcdodds/dom-testing-library/blob/master/src/events.js
-  - snapshot testing?
+`DOMComponent`: The retrieved DOM component.
 
-- social proof (Guillermo Rauch, Kent C. Dodds, Jamie Builds)
+```jsx
+const wrapper = mount(<MyComponent />);
+expect(wrapper.getDOMNode()).to.have.property('className');
+```
 
-  - https://twitter.com/jamiebuilds/status/1070062304518004736
-  - https://twitter.com/housecor/status/1074319158362415106
-  - Gatsby: https://www.gatsbyjs.org/docs/testing-react-components/
-  - react-redux uses RTL: https://github.com/reduxjs/react-redux/blob/v6.0.0/test/components/connect.spec.js
-  - testing a component that uses Context https://egghead.io/lessons/react-test-a-component-that-uses-a-react-context-consumer
+Soure: [enzyme docs](https://github.com/airbnb/enzyme/blob/master/docs/api/ReactWrapper/getDOMNode.md)
 
-- best practices:
+---
 
-  - make tests resilient! Shouldn't break when strings change E.g. https://twitter.com/kyleshevlin/status/921169512140914688?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E921169512140914688&ref_url=https%3A%2F%2Fblog.kentcdodds.com%2Fmedia%2F1cc146ae6727f5cfd6012f47f2f80aa1%3FpostId%3Dd37a6ee37269
-    - data-testid and babel plugin to remove in prod
+# Encourages accessibility
 
-- JSDOM? E2E tests?
+- Tests will fail if e.g. form not wired up to input correctly
+- RTL provides documentation: ["Which query should I use?"](https://testing-library.com/docs/guide-which-query)
+- #1 is **Queries Accessible to Everyone**: queries that reflect the experience of visual/mouse users as well as those that use assistive technology
 
-- EXAMPLES:
-  - Kent C Dodds react-redux example from RTL repo https://github.com/kentcdodds/react-testing-library/blob/master/examples/__tests__/react-redux.js
-  - Kent C Dodds react-router example https://github.com/kentcdodds/react-testing-library/blob/master/examples/__tests__/react-router.js
-  - react-testing-examples https://react-testing-examples.com/jest-enzyme/
+---
+
+# Summary
+
+- RTL allows us to test real DOM elements, not `ReactWrapper`s or React components, to more accurately test the experience of the end user
+- For this reason it pushes us away from testing implementation details which can give us false positives (tests that fail when we change the implementation) or false negatives (e.g. unit testing component props but a typo breaks the component)
+- It also encourages accessibility by providing queries that reflect the experience of visual/mouse users as well as those using assistive technology
+
+---
+
+# Summary cont'd
+
+- Better developer experience: handling async behaviour is easier and debugging is a breeze compared to Enzyme
+- Hooks: Enzyme doesn't play nicely with functional components, so RTL is more future-proof
+- Styled Components v4: we're currently prevented from upgrading because of a compatibility issue with enzyme
+
+---
+
+🔼 Thanks 🔼
